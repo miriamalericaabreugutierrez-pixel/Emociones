@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Mundo de las Emociones - 3.º Año</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        fredoka: ['Fredoka', 'cursive'],
+                    },
+                    colors: {
+                        alegria: '#FBBF24',
+                        tristeza: '#60A5FA',
+                        enojo: '#EF4444',
+                        miedo: '#A855F7',
+                        calma: '#34D399',
+                        sorpresa: '#F472B6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .font-fredoka { font-family: 'Fredoka', cursive; }
+        .breathe-animation {
+            animation: breathe 8s infinite ease-in-out;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); background-color: rgba(52, 211, 153, 0.2); }
+            40% { transform: scale(1.4); background-color: rgba(52, 211, 153, 0.5); }
+            50% { transform: scale(1.4); background-color: rgba(52, 211, 153, 0.5); }
+            90% { transform: scale(1); background-color: rgba(52, 211, 153, 0.2); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .custom-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .custom-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Encabezado Principal -->
+    <header class="bg-white border-b-4 border-amber-300 shadow-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchSection('inicio')">
+                <div class="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center text-white text-2xl shadow-inner floating">
+                    <i class="fa-solid fa-face-smile"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold font-fredoka text-slate-800 leading-tight">Exploradores Emocionales</h1>
+                    <p class="text-xs text-amber-600 font-bold uppercase tracking-wider">3.º Año de Primaria</p>
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <nav class="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                <button onclick="switchSection('explorador')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold flex items-center gap-2 bg-amber-100 text-amber-800 hover:bg-amber-200 transition">
+                    <i class="fa-solid fa-icons"></i> Emociones
+                </button>
+                <button onclick="switchSection('diario')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold flex items-center gap-2 bg-purple-100 text-purple-800 hover:bg-purple-200 transition">
+                    <i class="fa-solid fa-book-open"></i> Mi Diario
+                </button>
+                <button onclick="switchSection('calma')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold flex items-center gap-2 bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">
+                    <i class="fa-solid fa-wind"></i> Rincón de Calma
+                </button>
+                <button onclick="switchSection('juego')" class="nav-btn px-3 py-2 rounded-xl text-sm font-bold flex items-center gap-2 bg-rose-100 text-rose-800 hover:bg-rose-200 transition">
+                    <i class="fa-solid fa-gamepad"></i> Quiz Emocional
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Secciones -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6">
+
+        <!-- Banner de Inicio / Hero -->
+        <section id="section-inicio" class="mb-10">
+            <div class="bg-gradient-to-r from-amber-300 via-orange-300 to-rose-300 rounded-3xl p-6 md:p-10 shadow-lg text-slate-800 relative overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="inline-block px-3 py-1 bg-white/80 backdrop-blur-md rounded-full text-xs font-bold text-amber-900 mb-3">
+                        🌟 ¡Bienvenidos, exploradores de 3.º grado!
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold font-fredoka text-slate-900 mb-4 leading-snug">
+                        ¡Aprender a sentir es un súper poder!
+                    </h2>
+                    <p class="text-base md:text-lg mb-6 font-medium text-slate-800">
+                        Todas las emociones que sientes son válidas e importantes. Acompaña a nuestro equipo de superhéroes a descubrir qué significan, cómo se sienten en el cuerpo y qué hacer con ellas.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="switchSection('explorador')" class="bg-slate-900 text-white font-bold px-6 py-3 rounded-2xl shadow-md hover:bg-slate-800 transition flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-compass"></i> Empezar Aventura
+                        </button>
+                        <button onclick="switchSection('calma')" class="bg-white text-slate-800 font-bold px-6 py-3 rounded-2xl shadow-md hover:bg-slate-50 transition flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-spa"></i> Necesito Calmarme
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:block absolute -right-4 -bottom-6 w-72 h-72 opacity-90 pointer-events-none">
+                    <div class="w-full h-full relative flex items-center justify-center">
+                        <span class="text-9xl floating" style="animation-delay: 0s;">🌟</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: EXPLORADOR DE EMOCIONES -->
+        <section id="section-explorador" class="content-section">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <h2 class="text-3xl font-bold font-fredoka text-slate-800 mb-2">Conoce a las 6 Emociones Básicas</h2>
+                <p class="text-slate-600">Haz clic en cada emoción para conocer su súper poder, cómo se siente en tu cuerpo y qué consejos usar cuando aparezca.</p>
+            </div>
+
+            <!-- Grilla de Tarjetas -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Alegría -->
+                <div onclick="openEmotionModal('alegria')" class="custom-card bg-amber-50 border-3 border-amber-300 rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-400 text-white flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-laugh-beam"></i>
+                    </div>
+                    <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Emoción Positiva</span>
+                    <h3 class="text-2xl font-bold font-fredoka text-amber-900 mt-1">Alegría</h3>
+                    <p class="text-slate-600 text-sm mt-2">Nos llena de energía, ganas de sonreír, saltar y compartir con los demás.</p>
+                    <div class="mt-4 pt-3 border-t border-amber-200 flex justify-between items-center text-amber-700 font-bold text-sm">
+                        <span>Descubrir más</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Tristeza -->
+                <div onclick="openEmotionModal('tristeza')" class="custom-card bg-blue-50 border-3 border-blue-300 rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-400 text-white flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-sad-tear"></i>
+                    </div>
+                    <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Emoción de Refugio</span>
+                    <h3 class="text-2xl font-bold font-fredoka text-blue-900 mt-1">Tristeza</h3>
+                    <p class="text-slate-600 text-sm mt-2">Aparece cuando perdemos algo querido o nos sentimos desanimados. Nos pide consuelo.</p>
+                    <div class="mt-4 pt-3 border-t border-blue-200 flex justify-between items-center text-blue-700 font-bold text-sm">
+                        <span>Descubrir más</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Enojo / Ira -->
+                <div onclick="openEmotionModal('enojo')" class="custom-card bg-rose-50 border-3 border-rose-300 rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-angry"></i>
+                    </div>
+                    <span class="text-xs font-bold text-rose-700 uppercase tracking-widest">Emoción de Defensa</span>
+                    <h3 class="text-2xl font-bold font-fredoka text-rose-900 mt-1">Enojo</h3>
+                    <p class="text-slate-600 text-sm mt-2">Nace cuando sentimos que algo es injusto. Nos avisa que debemos defender un límite con respeto.</p>
+                    <div class="mt-4 pt-3 border-t border-rose-200 flex justify-between items-center text-rose-700 font-bold text-sm">
+                        <span>Descubrir más</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Miedo -->
+                <div onclick="openEmotionModal('miedo')" class="custom-card bg-purple-50 border-3 border-purple-300 rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-500 text-white flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-flushed"></i>
+                    </div>
+                    <span class="text-xs font-bold text-purple-700 uppercase tracking-widest">Emoción de Protección</span>
+                    <h3 class="text-2xl font-bold font-fredoka text-purple-900 mt-1">Miedo</h3>
+                    <p class="text-slate-600 text-sm mt-2">Nos pone en alerta ante peligros reales o imaginarios para mantenernos a salvo.</p>
+                    <div class="mt-4 pt-3 border-t border-purple-200 flex justify-between items-center text-purple-700 font-bold text-sm">
+                        <span>Descubrir más</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Calma -->
+                <div onclick="openEmotionModal('calma')" class="custom-card bg-emerald-50 border-3 border-emerald-300 rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-smile-beam"></i>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Emoción de Tranquilidad</span>
+                    <h3 class="text-2xl font-bold font-fredoka text-emerald-900 mt-1">Calma</h3>
+                    <p class="text-slate-600 text-sm mt-2">Es la tranquilidad del mar en calma. Nos permite pensar con claridad y relajarnos.</p>
+                    <div class="mt-4 pt-3 border-t border-emerald-200 flex justify-between items-center text-emerald-700 font-bold text-sm">
+                        <span>Descubrir más</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Sorpresa -->
+                <div onclick="openEmotionModal('sorpresa')" class="custom-card bg-pink-50 border-3 border-pink-300 rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-xl relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-2xl bg-pink-400 text-white flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-surprise"></i>
+                    </div>
+                    <span class="text-xs font-bold text-pink-700 uppercase tracking-widest">Emoción de Descubrimiento</span>
+                    <h3 class="text-2xl font-bold font-fredoka text-pink-900 mt-1">Sorpresa</h3>
+                    <p class="text-slate-600 text-sm mt-2">Dura un segundo y despierta nuestra curiosidad ante algo nuevo e imprevisto.</p>
+                    <div class="mt-4 pt-3 border-t border-pink-200 flex justify-between items-center text-pink-700 font-bold text-sm">
+                        <span>Descubrir más</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: DIARIO Y TERMÓMETRO EMOCIONAL -->
+        <section id="section-diario" class="content-section hidden">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-100">
+                <div class="text-center mb-6">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Check-in Diario</span>
+                    <h2 class="text-3xl font-bold font-fredoka text-slate-800 mt-1">¿Cómo te sientes hoy?</h2>
+                    <p class="text-slate-500 text-sm">Registra tu emoción y mide tu intensidad emocional como un gran científico.</p>
+                </div>
+
+                <form id="emotion-tracker-form" onsubmit="saveJournalEntry(event)" class="space-y-6">
+                    <!-- Paso 1: Elegir Emoción -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">1. Selecciona tu emoción de hoy:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <button type="button" onclick="selectTrackerEmotion('Alegría', '😄', 'bg-amber-100 border-amber-400 text-amber-800')" class="tracker-emo-btn border-2 border-slate-200 rounded-2xl p-3 flex flex-col items-center hover:bg-amber-50 transition">
+                                <span class="text-3xl">😄</span>
+                                <span class="font-bold text-xs mt-1">Alegría</span>
+                            </button>
+                            <button type="button" onclick="selectTrackerEmotion('Tristeza', '😢', 'bg-blue-100 border-blue-400 text-blue-800')" class="tracker-emo-btn border-2 border-slate-200 rounded-2xl p-3 flex flex-col items-center hover:bg-blue-50 transition">
+                                <span class="text-3xl">😢</span>
+                                <span class="font-bold text-xs mt-1">Tristeza</span>
+                            </button>
+                            <button type="button" onclick="selectTrackerEmotion('Enojo', '😡', 'bg-rose-100 border-rose-400 text-rose-800')" class="tracker-emo-btn border-2 border-slate-200 rounded-2xl p-3 flex flex-col items-center hover:bg-rose-50 transition">
+                                <span class="text-3xl">😡</span>
+                                <span class="font-bold text-xs mt-1">Enojo</span>
+                            </button>
+                            <button type="button" onclick="selectTrackerEmotion('Miedo', '😨', 'bg-purple-100 border-purple-400 text-purple-800')" class="tracker-emo-btn border-2 border-slate-200 rounded-2xl p-3 flex flex-col items-center hover:bg-purple-50 transition">
+                                <span class="text-3xl">😨</span>
+                                <span class="font-bold text-xs mt-1">Miedo</span>
+                            </button>
+                            <button type="button" onclick="selectTrackerEmotion('Calma', '😌', 'bg-emerald-100 border-emerald-400 text-emerald-800')" class="tracker-emo-btn border-2 border-slate-200 rounded-2xl p-3 flex flex-col items-center hover:bg-emerald-50 transition">
+                                <span class="text-3xl">😌</span>
+                                <span class="font-bold text-xs mt-1">Calma</span>
+                            </button>
+                            <button type="button" onclick="selectTrackerEmotion('Sorpresa', '😲', 'bg-pink-100 border-pink-400 text-pink-800')" class="tracker-emo-btn border-2 border-slate-200 rounded-2xl p-3 flex flex-col items-center hover:bg-pink-50 transition">
+                                <span class="text-3xl">😲</span>
+                                <span class="font-bold text-xs mt-1">Sorpresa</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Intensidad -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-bold text-slate-700">2. Termómetro de Intensidad:</label>
+                            <span id="intensity-label" class="text-xs font-bold px-2 py-1 bg-amber-100 text-amber-800 rounded-lg">Un poco (Nivel 2)</span>
+                        </div>
+                        <input type="range" id="intensity-slider" min="1" max="5" value="2" oninput="updateIntensityLabel(this.value)" class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-600">
+                        <div class="flex justify-between text-xs text-slate-400 font-bold mt-1">
+                            <span>1 - Muy suave</span>
+                            <span>3 - Medio</span>
+                            <span>5 - ¡Muy fuerte!</span>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: Nota / Razón -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">3. ¿Qué te hace sentir así hoy? (Opcional):</label>
+                        <textarea id="journal-reason" rows="3" placeholder="Ejemplo: Hoy saqué buena nota en matemática y jugué con mis amigos en el recreo..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-400 focus:outline-none text-sm"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar mi registro de hoy
+                    </button>
+                </form>
+
+                <!-- Historial de entradas recientes -->
+                <div class="mt-8 pt-6 border-t border-slate-100">
+                    <h3 class="text-lg font-bold font-fredoka text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-purple-500"></i> Mis Registros Anteriores
+                    </h3>
+                    <div id="journal-history" class="space-y-3">
+                        <p class="text-xs text-slate-400 italic">Todavía no has registrado ninguna emoción hoy. ¡Completa el formulario de arriba!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: RINCÓN DE CALMA Y RESPIRACIÓN -->
+        <section id="section-calma" class="content-section hidden">
+            <div class="max-w-2xl mx-auto bg-gradient-to-b from-emerald-50 to-teal-50 rounded-3xl p-6 md:p-10 shadow-xl border border-emerald-200 text-center">
+                <span class="bg-emerald-200 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Técnica del Globo</span>
+                <h2 class="text-3xl font-bold font-fredoka text-emerald-900 mt-2">El Rincón del Respiro</h2>
+                <p class="text-slate-600 text-sm mt-1 mb-8">Cuando sientas rabia, angustia o demasiada energía, haz una pausa. Respira suavemente siguiendo el ritmo del círculo.</p>
+
+                <!-- Círculo animado de respiración -->
+                <div class="relative flex items-center justify-center my-8">
+                    <div id="breathing-circle" class="w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-emerald-300/40 border-4 border-emerald-400 flex items-center justify-center shadow-inner transition-transform duration-1000">
+                        <div class="text-center p-4">
+                            <span id="breath-text" class="text-xl font-extrabold font-fredoka text-emerald-900 block">Inhala...</span>
+                            <span id="breath-timer" class="text-2xl font-bold text-emerald-700 mt-1 block">4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de Control -->
+                <div class="flex justify-center gap-4 mt-6">
+                    <button id="start-breath-btn" onclick="toggleBreathingExercise()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-2xl shadow-lg transition flex items-center gap-2 text-base">
+                        <i class="fa-solid fa-play"></i> Comenzar Ejercicio
+                    </button>
+                </div>
+
+                <!-- Consejos breves de autorregulación -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-10 text-left">
+                    <div class="bg-white/80 backdrop-blur p-3 rounded-2xl border border-emerald-100 text-xs">
+                        <span class="font-bold text-emerald-800 block mb-1">✋ 1. Cuenta hasta 5</span>
+                        Tómate unos segundos antes de responder si estás enojado.
+                    </div>
+                    <div class="bg-white/80 backdrop-blur p-3 rounded-2xl border border-emerald-100 text-xs">
+                        <span class="font-bold text-emerald-800 block mb-1">💧 2. Bebe agua</span>
+                        Un sorbo de agua fresca ayuda a calmar la aceleración del cuerpo.
+                    </div>
+                    <div class="bg-white/80 backdrop-blur p-3 rounded-2xl border border-emerald-100 text-xs">
+                        <span class="font-bold text-emerald-800 block mb-1">💬 3. Habla con alguien</span>
+                        Expresar en palabras lo que sientes alivia la carga del corazón.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: QUIZ EMOCIONAL INTERACTIVO -->
+        <section id="section-juego" class="content-section hidden">
+            <div class="max-w-2xl mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-100">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Cuestionario Mágico</span>
+                        <h2 class="text-2xl font-bold font-fredoka text-slate-800 mt-1">Desafío de Empatía</h2>
+                    </div>
+                    <div class="bg-amber-100 px-4 py-2 rounded-2xl text-amber-800 font-extrabold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-star text-amber-500"></i> Puntos: <span id="quiz-score">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Pregunta -->
+                <div id="quiz-card" class="bg-slate-50 rounded-2xl p-6 border border-slate-200 mb-6">
+                    <span id="quiz-step" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pregunta 1 de 4</span>
+                    <h3 id="quiz-question" class="text-lg font-bold text-slate-800 mt-2 mb-4 leading-relaxed">
+                        Cargando pregunta...
+                    </h3>
+
+                    <!-- Opciones de Respuesta -->
+                    <div id="quiz-options" class="space-y-3">
+                        <!-- Las opciones se generan dinámicamente con JS -->
+                    </div>
+                </div>
+
+                <!-- Mensaje de Retroalimentación -->
+                <div id="quiz-feedback" class="hidden p-4 rounded-2xl mb-4 text-sm font-bold"></div>
+
+                <!-- Botón de Siguiente Pregunta -->
+                <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-6 rounded-2xl shadow transition text-center">
+                    Siguiente Pregunta <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal para detalle de emociones -->
+    <div id="emotion-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative animate-fade-in max-h-[90vh] overflow-y-auto">
+            <button onclick="closeEmotionModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 flex items-center justify-center font-bold text-lg">
+                ✕
+            </button>
+
+            <div class="flex items-center gap-4 mb-4">
+                <div id="modal-icon-bg" class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-md">
+                    <i id="modal-icon" class="fa-solid fa-face-smile"></i>
+                </div>
+                <div>
+                    <span id="modal-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">Categoría</span>
+                    <h3 id="modal-title" class="text-2xl font-bold font-fredoka text-slate-800">Nombre</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-sm">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-heart-pulse text-rose-500"></i> ¿Qué sentimos en el cuerpo?
+                    </h4>
+                    <p id="modal-body-sensation" class="text-slate-600">Descripción de sensación corporal.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> ¿Para qué nos sirve esta emoción?
+                    </h4>
+                    <p id="modal-purpose" class="text-slate-600">Propósito de la emoción.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-500"></i> Consejo de Súper Poder:
+                    </h4>
+                    <p id="modal-advice" class="text-slate-600">Consejo o estrategia de manejo.</p>
+                </div>
+            </div>
+
+            <button onclick="closeEmotionModal()" class="mt-6 w-full bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold py-3 rounded-2xl shadow transition">
+                ¡Entendido! 👍
+            </button>
+        </div>
+    </div>
+
+    <!-- Pie de Página -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500 space-y-2">
+            <p class="font-bold text-slate-700">Recurso Educativo de Educación Socioemocional - 3.º Año de Educación Primaria</p>
+            <p>Diseñado para promover la empatía, el reconocimiento emocional y el clima escolar positivo.</p>
+        </div>
+    </footer>
+
+    <!-- LÓGICA Y ESTADO EN JAVASCRIPT -->
+    <script>
+        // Base de Datos de Emociones
+        const EMOTIONS_DATA = {
+            alegria: {
+                title: "Alegría",
+                category: "Energía Positiva",
+                badgeClass: "bg-amber-100 text-amber-800",
+                iconClass: "fa-face-laugh-beam",
+                bgClass: "bg-amber-400",
+                body: "Mariposas en el estómago, sonrisa gigante, cuerpo liviano y lleno de ganas de bailar o abrazar.",
+                purpose: "Nos indica qué cosas nos gustan, nos hacen bien y nos conecta con nuestros amigos y familia.",
+                advice: "¡Compártela! Cuando contagias tu alegría con una sonrisa o una buena palabra, haces feliz a los demás."
+            },
+            tristeza: {
+                title: "Tristeza",
+                category: "Refugio y Afecto",
+                badgeClass: "bg-blue-100 text-blue-800",
+                iconClass: "fa-face-sad-tear",
+                bgClass: "bg-blue-400",
+                body: "Nudo en la garganta, ojos con lágrimas, cuerpo pesado, poca energía y ganas de estar quietito.",
+                purpose: "Nos avisa que necesitamos apoyo, consuelo o un abrazo cariñoso para sanar una herida.",
+                advice: "No te guardes el llanto. Busca a un adulto de confianza (maestra, mamá, papá) y cuéntale qué sientes."
+            },
+            enojo: {
+                title: "Enojo",
+                category: "Límites y Justicia",
+                badgeClass: "bg-rose-100 text-rose-800",
+                iconClass: "fa-face-angry",
+                bgClass: "bg-rose-500",
+                body: "Corazón acelerado, puños cerrados, ceño fruncido y cara caliente como un volcán.",
+                purpose: "Nos señala cuando algo nos parece injusto o rompen una regla importante para nosotros.",
+                advice: "Respira hondo antes de hablar. Estar enojado es normal, pero lastimar a otros o romper cosas no está bien."
+            },
+            miedo: {
+                title: "Miedo",
+                category: "Alerta y Protección",
+                badgeClass: "bg-purple-100 text-purple-800",
+                iconClass: "fa-face-flushed",
+                bgClass: "bg-purple-500",
+                body: "Temblor en las piernas, respiración rápida, escalofríos y ojos muy abiertos.",
+                purpose: "Nos ayuda a ser prudentes ante cosas desconocidas o situaciones peligrosas.",
+                advice: "Recuerda que eres muy valiente. Enfrenta el miedo acompañado de un amigo o adulto que te dé seguridad."
+            },
+            calma: {
+                title: "Calma",
+                category: "Paz y Claridad",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                iconClass: "fa-face-smile-beam",
+                bgClass: "bg-emerald-500",
+                body: "Músculos relajados, respiración pausada y mente clara como agua transparente.",
+                purpose: "Nos ayuda a prestar atención en clase, resolver problemas con sabiduría y descansar.",
+                advice: "Disfruta el momento presente. Puedes pintar, escuchar música tranquila o pasear."
+            },
+            sorpresa: {
+                title: "Sorpresa",
+                category: "Curiosidad",
+                badgeClass: "bg-pink-100 text-pink-800",
+                iconClass: "fa-face-surprise",
+                bgClass: "bg-pink-400",
+                body: "Boca abierta, cejas levantadas y un salto rápido del corazón.",
+                purpose: "Abre nuestra mente para explorar sorpresas y aprender datos nuevos e interesantes.",
+                advice: "¡Sé curioso! Aprovecha para preguntar '¿por qué?' y descubrir cosas geniales del mundo."
+            }
+        };
+
+        // Preguntas del Quiz de 3º Grado
+        const QUIZ_DATA = [
+            {
+                question: "A Mateo se le cayó su torre de bloques que tardó 20 minutos en construir. ¿Cómo es normal que se sienta y qué debería hacer?",
+                options: [
+                    { text: "Enojado o triste. Puede respirar hondo y pedir ayuda para construirla otra vez.", correct: true },
+                    { text: "Alegre. Debe gritarle a sus compañeros.", correct: false },
+                    { text: "Sin ninguna emoción. No le importa nada.", correct: false }
+                ],
+                explanation: "¡Exacto! Es normal sentir frustración o enojo, pero lo más sabio es calmarse y volver a intentarlo o pedir ayuda."
+            },
+            {
+                question: "Sofía nota que su compañera nueva está sentada sola en el recreo mirando al suelo. ¿Qué emoción puede tener su compañera y qué puede hacer Sofía?",
+                options: [
+                    { text: "Siente timidez o tristeza. Sofía puede invitarla a jugar con su grupo.", correct: true },
+                    { text: "Siente mucha alegría. Es mejor dejarla sola.", correct: false },
+                    { text: "Está enojada con todos los niños de la escuela.", correct: false }
+                ],
+                explanation: "¡Excelente! La empatía es ponerse en el lugar del otro. Invitar a alguien solo en el recreo es una gran acción de amigo."
+            },
+            {
+                question: "Mañana es el primer examen de lectura de Lucas y siente mariposas en el estómago y temblor suave en las manos. ¿Qué le pasa?",
+                options: [
+                    { text: "Tiene miedo o nervios. Puede repasar tranquilo y confiar en lo que estudió.", correct: true },
+                    { text: "Está muy enojado con su maestra.", correct: false },
+                    { text: "Siente mucha rabia y debe romper su libreta.", correct: false }
+                ],
+                explanation: "¡Muy bien! Los nervios o el miedo antes de un desafío son normales. Practicar y respirar da mucha seguridad."
+            },
+            {
+                question: "Cuando sentimos que el 'volcán del enojo' quiere explotar dentro de nosotros, ¿cuál es el mejor súper consejo?",
+                options: [
+                    { text: "Pausar, usar el Rincón de Calma y decir con palabras respetuosas qué me molestó.", correct: true },
+                    { text: "Empujar a los demás y gritar fuerte.", correct: false },
+                    { text: "Guardarme todo adentro y no hablar nunca más.", correct: false }
+                ],
+                explanation: "¡Fantástico! Las palabras y la respiración son nuestras mejores herramientas para resolver cualquier conflicto."
+            }
+        ];
+
+        // Estado Global de la App
+        let selectedJournalEmotion = { name: '', emoji: '', bgClass: '' };
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let breathingInterval = null;
+        let isBreathingActive = false;
+
+        // Cambiar entre secciones de la app
+        function switchSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+            
+            const target = document.getElementById(`section-${sectionId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Si cambiamos de sección, detendremos la respiración si estaba activa
+            if (sectionId !== 'calma' && isBreathingActive) {
+                stopBreathingExercise();
+            }
+
+            // Scroll suave arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Abrir Modal de Emoción
+        function openEmotionModal(key) {
+            const data = EMOTIONS_DATA[key];
+            if (!data) return;
+
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-badge').innerText = data.category;
+            document.getElementById('modal-badge').className = `text-xs font-bold px-2.5 py-0.5 rounded-full uppercase ${data.badgeClass}`;
+            
+            const iconBg = document.getElementById('modal-icon-bg');
+            iconBg.className = `w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-md ${data.bgClass}`;
+            
+            const icon = document.getElementById('modal-icon');
+            icon.className = `fa-solid ${data.iconClass}`;
+
+            document.getElementById('modal-body-sensation').innerText = data.body;
+            document.getElementById('modal-purpose').innerText = data.purpose;
+            document.getElementById('modal-advice').innerText = data.advice;
+
+            document.getElementById('emotion-modal').classList.remove('hidden');
+        }
+
+        function closeEmotionModal() {
+            document.getElementById('emotion-modal').classList.add('hidden');
+        }
+
+        // Selección de Emoción en el Diario
+        function selectTrackerEmotion(name, emoji, bgClass) {
+            selectedJournalEmotion = { name, emoji, bgClass };
+            
+            // Resaltar el botón seleccionado
+            document.querySelectorAll('.tracker-emo-btn').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-purple-400', 'bg-purple-50');
+            });
+
+            event.currentTarget.classList.add('ring-4', 'ring-purple-400', 'bg-purple-50');
+        }
+
+        function updateIntensityLabel(value) {
+            const label = document.getElementById('intensity-label');
+            const descriptions = [
+                'Muy poquito (Nivel 1)',
+                'Un poco (Nivel 2)',
+                'Medio (Nivel 3)',
+                'Fuerte (Nivel 4)',
+                '¡Súper Intenso! (Nivel 5)'
+            ];
+            label.innerText = descriptions[value - 1];
+        }
+
+        function saveJournalEntry(e) {
+            e.preventDefault();
+            
+            if (!selectedJournalEmotion.name) {
+                alertCustom('Por favor selecciona una emoción antes de guardar tu registro.');
+                return;
+            }
+
+            const intensity = document.getElementById('intensity-slider').value;
+            const reason = document.getElementById('journal-reason').value.trim();
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            const historyContainer = document.getElementById('journal-history');
+            
+            // Si es el primer elemento, limpiamos el texto por defecto
+            if (historyContainer.querySelector('p')) {
+                historyContainer.innerHTML = '';
+            }
+
+            const entryCard = document.createElement('div');
+            entryCard.className = `p-4 rounded-2xl border flex items-start gap-3 transition ${selectedJournalEmotion.bgClass}`;
+            entryCard.innerHTML = `
+                <span class="text-3xl">${selectedJournalEmotion.emoji}</span>
+                <div class="flex-grow">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-slate-800 text-sm">${selectedJournalEmotion.name} (Intensidad: ${intensity}/5)</h4>
+                        <span class="text-xs text-slate-500 font-semibold">${time}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 mt-1">${reason ? `"${reason}"` : 'Sin nota adicional.'}</p>
+                </div>
+            `;
+
+            historyContainer.prepend(entryCard);
+
+            // Reiniciar campos
+            document.getElementById('journal-reason').value = '';
+            alertCustom(`¡Excelente! Registraste que te sientes con ${selectedJournalEmotion.name}. ¡Sigue cuidando tus emociones! 🌟`);
+        }
+
+        // Ejercicio de Respiración
+        function toggleBreathingExercise() {
+            if (isBreathingActive) {
+                stopBreathingExercise();
+            } else {
+                startBreathingExercise();
+            }
+        }
+
+        function startBreathingExercise() {
+            isBreathingActive = true;
+            const circle = document.getElementById('breathing-circle');
+            const breathText = document.getElementById('breath-text');
+            const breathTimer = document.getElementById('breath-timer');
+            const btn = document.getElementById('start-breath-btn');
+
+            btn.innerHTML = `<i class="fa-solid fa-pause"></i> Detener Ejercicio`;
+            btn.className = "bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-8 rounded-2xl shadow-lg transition flex items-center gap-2 text-base";
+
+            circle.classList.add('breathe-animation');
+
+            let phase = 0; // 0: Inhala, 1: Mantén, 2: Exhala
+            let count = 4;
+
+            breathText.innerText = "Inhala suavemente...";
+            breathTimer.innerText = count;
+
+            breathingInterval = setInterval(() => {
+                count--;
+                if (count <= 0) {
+                    phase = (phase + 1) % 3;
+                    if (phase === 0) {
+                        count = 4;
+                        breathText.innerText = "Inhala suavemente...";
+                    } else if (phase === 1) {
+                        count = 2;
+                        breathText.innerText = "Mantén el aire...";
+                    } else {
+                        count = 4;
+                        breathText.innerText = "Exhala despacio...";
+                    }
+                }
+                breathTimer.innerText = count;
+            }, 1000);
+        }
+
+        function stopBreathingExercise() {
+            isBreathingActive = false;
+            clearInterval(breathingInterval);
+
+            const circle = document.getElementById('breathing-circle');
+            const breathText = document.getElementById('breath-text');
+            const breathTimer = document.getElementById('breath-timer');
+            const btn = document.getElementById('start-breath-btn');
+
+            circle.classList.remove('breathe-animation');
+            breathText.innerText = "En pausa";
+            breathTimer.innerText = "Ready";
+
+            btn.innerHTML = `<i class="fa-solid fa-play"></i> Comenzar Ejercicio`;
+            btn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-2xl shadow-lg transition flex items-center gap-2 text-base";
+        }
+
+        // Lógica del Quiz
+        function renderQuizQuestion() {
+            if (currentQuizIndex >= QUIZ_DATA.length) {
+                // Fin del quiz
+                document.getElementById('quiz-card').innerHTML = `
+                    <div class="text-center py-8">
+                        <span class="text-6xl mb-4 block">🏆</span>
+                        <h3 class="text-2xl font-bold font-fredoka text-slate-800">¡Felicitaciones, Experto Emocional!</h3>
+                        <p class="text-slate-600 my-3">Completaste el cuestionario mágico con <strong class="text-amber-600">${quizScore}</strong> puntos.</p>
+                        <p class="text-xs text-slate-500 mb-6">Recuerda aplicar la empatía y la autorregulación todos los días en la escuela y en casa.</p>
+                        <button onclick="restartQuiz()" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold py-3 px-6 rounded-2xl shadow transition">
+                            Volver a Jugar 🔄
+                        </button>
+                    </div>
+                `;
+                document.getElementById('quiz-feedback').classList.add('hidden');
+                document.getElementById('quiz-next-btn').classList.add('hidden');
+                return;
+            }
+
+            const data = QUIZ_DATA[currentQuizIndex];
+            document.getElementById('quiz-step').innerText = `Pregunta ${currentQuizIndex + 1} de ${QUIZ_DATA.length}`;
+            document.getElementById('quiz-question').innerText = data.question;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            data.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-purple-400 hover:bg-purple-50 transition font-medium text-slate-700 text-sm flex items-center justify-between";
+                btn.innerHTML = `<span>${opt.text}</span> <i class="fa-regular fa-circle text-slate-300"></i>`;
+                btn.onclick = () => checkQuizAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+        }
+
+        function checkQuizAnswer(option, btnElement) {
+            // Deshabilitar todas las opciones
+            const buttons = document.querySelectorAll('#quiz-options button');
+            buttons.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+
+            if (option.correct) {
+                btnElement.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                feedback.className = "p-4 rounded-2xl mb-4 text-sm font-bold bg-emerald-100 border border-emerald-300 text-emerald-900 flex items-start gap-2";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 text-xl mt-0.5"></i> <div>¡Excelente respuesta! ${QUIZ_DATA[currentQuizIndex].explanation}</div>`;
+                quizScore += 10;
+                document.getElementById('quiz-score').innerText = quizScore;
+            } else {
+                btnElement.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-900');
+                feedback.className = "p-4 rounded-2xl mb-4 text-sm font-bold bg-amber-100 border border-amber-300 text-amber-900 flex items-start gap-2";
+                feedback.innerHTML = `<i class="fa-solid fa-lightbulb text-amber-600 text-xl mt-0.5"></i> <div>¡Casi! La respuesta recomendada era otra. ${QUIZ_DATA[currentQuizIndex].explanation}</div>`;
+            }
+
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            renderQuizQuestion();
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            document.getElementById('quiz-score').innerText = quizScore;
+            // Restaurar el DOM del Quiz
+            document.getElementById('quiz-card').innerHTML = `
+                <span id="quiz-step" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pregunta 1 de 4</span>
+                <h3 id="quiz-question" class="text-lg font-bold text-slate-800 mt-2 mb-4 leading-relaxed">Cargando...</h3>
+                <div id="quiz-options" class="space-y-3"></div>
+            `;
+            renderQuizQuestion();
+        }
+
+        // Sistema de Mensajes Accesible Reemplazando Alert Native
+        function alertCustom(message) {
+            const alertBox = document.createElement('div');
+            alertBox.className = "fixed bottom-5 right-5 bg-slate-900 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl z-50 text-sm flex items-center gap-3 animate-bounce";
+            alertBox.innerHTML = `<span>💬 ${message}</span>`;
+            document.body.appendChild(alertBox);
+            setTimeout(() => {
+                alertBox.remove();
+            }, 4000);
+        }
+
+        // Inicializar la aplicación
+        window.onload = function() {
+            renderQuizQuestion();
+        };
+    </script>
+</body>
+</html>
